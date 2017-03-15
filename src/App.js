@@ -31,7 +31,7 @@ class App extends Component {
         </div>
           <div className='Todo-App'>
               <form>
-                  <input type='test' />
+                  <input type='text' />
               </form>
               <div className='Todo-list'>
                   <ul>
