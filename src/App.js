@@ -11,7 +11,8 @@ class App extends Component {
               { id: 1, name: 'Task 1', isComplete: false },
               { id: 2, name: 'Task 2', isComplete: false },
               { id: 3, name: 'Task 3', isComplete: false }
-          ]
+          ],
+          currentTodo: ''
       }
   }
 
@@ -20,6 +21,10 @@ class App extends Component {
     if (currentTodo) {
       currentTodo.isComplete = !currentTodo.isComplete
       this.setState({ todos: _.merge(this.state.todos, currentTodo) }) }
+  }
+
+  handleInputChange(e) {
+    this.setState({ currentTodo: e.target.value })
   }
 
   render() {
@@ -31,7 +36,7 @@ class App extends Component {
         </div>
           <div className='Todo-App'>
               <form>
-                  <input type='text' />
+                  <input type='text' value={this.state.currentTodo} onChange={this.handleInputChange.bind(this)}/>
               </form>
               <div className='Todo-list'>
                   <ul>
