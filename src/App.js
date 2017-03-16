@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import _ from 'lodash'
-import { TodoForm } from './components/todo/TodoForm'
+import { TodoForm, TodoList } from './components/todo'
 
 class App extends Component {
   constructor() {
@@ -17,7 +17,7 @@ class App extends Component {
       }
   }
 
-  _updateTodo(id) {
+  updateTodo(id) {
     const currentTodo = this.state.todos.filter(t => { return t.id === id })[0]
     if (currentTodo) {
       currentTodo.isComplete = !currentTodo.isComplete
@@ -40,13 +40,10 @@ class App extends Component {
                 currentTodo={this.state.currentTodo}
                 handleInputChange={this.handleInputChange.bind(this)}
               />
-              <div className='Todo-list'>
-                  <ul>
-                      {this.state.todos.map((todo) => {
-                          return (<li key={todo.id}><input onChange={this._updateTodo.bind(this, todo.id)} checked={todo.isComplete} type='checkbox'/> {todo.name}</li>)
-                      })}
-                  </ul>
-              </div>
+              <TodoList
+                todos={this.state.todos}
+                updateTodo={this.updateTodo.bind(this)}
+              />
           </div>
       </div>
     );
