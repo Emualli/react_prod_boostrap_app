@@ -1,20 +1,11 @@
 import React from 'react'
+import { TodoItem } from './TodoItem'
 
 export const TodoList = (props) => {
   return (
     <div className='Todo-list'>
       <ul>
-        {props.todos.map((todo) => {
-          return (
-            <li key={todo.id}>
-              <input
-                onChange={props.updateTodo.bind(this, todo.id)}
-                checked={todo.isComplete}
-                type='checkbox'/>
-                {todo.name}
-            </li>
-          )
-        })}
+        {props.todos.map(todo =>  <TodoItem key={todo.id} {...todo} updateTodo={props.updateTodo} /> )}
       </ul>
     </div>
   )
