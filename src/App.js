@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import _ from 'lodash'
 import { TodoForm, TodoList } from './components/todo'
-import { addTodo, generateId } from './lib/todoHelpers'
+import { addTodo, generateId, findById, toggleTodo, updateTodo } from './lib/todoHelpers'
 
 class App extends Component {
   constructor() {
@@ -20,12 +20,11 @@ class App extends Component {
   this.handleEmptySubmit = this.handleEmptySubmit.bind(this)
   }
 
-  updateTodo(id) {
-    const currentTodo = this.state.todos.filter(t => { return t.id === id })[0]
-    if (currentTodo) {
-      currentTodo.isComplete = !currentTodo.isComplete
-      this.setState({ todos: _.merge(this.state.todos, currentTodo) }) }
-  }
+  handleToggle = (id) => {
+    const todo = findById(id, this.state.todos)
+    const todos = updateTodo(this.state.todos, toggleTodo(todo))
+    this.setState({ todos })
+}
 
   handleInputChange(e) {
     this.setState({ currentTodo: e.target.value })
@@ -67,7 +66,7 @@ class App extends Component {
               />
               <TodoList
                 todos={this.state.todos}
-                updateTodo={this.updateTodo.bind(this)}
+                updateTodo={this.handleToggle}
               />
           </div>
       </div>

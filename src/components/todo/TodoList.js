@@ -5,7 +5,7 @@ export const TodoList = (props) => {
   return (
     <div className='Todo-list'>
       <ul>
-        {props.todos.map(todo =>  <TodoItem key={todo.id} {...todo} updateTodo={props.updateTodo} /> )}
+        {props.todos.map(todo =>  <TodoItem key={todo.id} {...todo} updateTodo={props.updateTodo.bind(todo.id)} /> )}
       </ul>
     </div>
   )
